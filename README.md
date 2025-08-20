@@ -30,7 +30,3 @@ I am a math tutor, and this application was created to save time during the tuto
 ![Main view](screenshots/main.png)
 
 ---
-
-## 📄 License
-© All rights reserved.
-This project was created for educational purposes and will also be used as part of the DayMath commercial application.
