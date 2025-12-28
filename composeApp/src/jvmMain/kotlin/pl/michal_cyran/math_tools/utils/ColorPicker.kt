@@ -41,7 +41,7 @@
                     label = { Text("Wybierz kolor") },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                     colors = ExposedDropdownMenuDefaults.textFieldColors(),
-                    modifier = Modifier.menuAnchor() // <-- to jest wymagane!
+                    modifier = Modifier.menuAnchor()
                 )
                 ExposedDropdownMenu(
                     expanded = expanded,

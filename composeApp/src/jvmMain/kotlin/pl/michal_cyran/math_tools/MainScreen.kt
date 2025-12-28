@@ -153,8 +153,3 @@ fun MainScreen() {
         }
     }
 }
-
-data class TabItem(
-    val title: String,
-    val icon: DrawableResource
-)
