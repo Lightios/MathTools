@@ -8,14 +8,15 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.CanvasDrawScope
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
+import pl.michal_cyran.math_tools.drawings.core.DefaultParameters
 
 fun drawChessboardToBitmap(
     rows: Int,
     columns: Int,
     firstColor: Color = Color.Black,
     secondColor: Color = Color.White,
-    width: Int = 1000,
-    height: Int = 1000,
+    width: Int = DefaultParameters.WIDTH,
+    height: Int = DefaultParameters.HEIGHT,
 ): ImageBitmap {
     val drawScope = CanvasDrawScope()
     val size = Size(width.toFloat(), height.toFloat())

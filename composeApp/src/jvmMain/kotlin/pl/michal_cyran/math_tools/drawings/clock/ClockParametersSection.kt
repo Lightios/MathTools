@@ -1,4 +1,4 @@
-package pl.michal_cyran.math_tools.drawings.coordinate_system
+package pl.michal_cyran.math_tools.drawings.clock
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -19,27 +19,15 @@ import androidx.compose.ui.unit.dp
 import pl.michal_cyran.math_tools.drawings.core.DrawingParameters
 
 @Composable
-fun CoordinateSystemParametersSection(
-    onParametersChange: (DrawingParameters.CoordinateSystemParameters) -> Unit = {}
+fun ClockParametersSection(
+    onParametersChange: (DrawingParameters.ClockParameters) -> Unit = {}
 ) {
-    var minX by remember { mutableStateOf(-5) }
-    var maxX by remember { mutableStateOf(5) }
-    var minY by remember { mutableStateOf(-5) }
-    var maxY by remember { mutableStateOf(5) }
-
+    var hours by remember { mutableStateOf(2) }
+    var minutes by remember { mutableStateOf(2) }
     val textMeasurer = rememberTextMeasurer()
 
-    LaunchedEffect(minX, maxY, minY, maxY) {
-        onParametersChange(
-            DrawingParameters.CoordinateSystemParameters(
-                minX = minX,
-                maxX = maxX,
-                minY = minY,
-                maxY = maxY,
-                includeGrid = false,
-                textMeasurer = textMeasurer
-            )
-        )
+    LaunchedEffect(hours, minutes) {
+        onParametersChange(DrawingParameters.ClockParameters(hours, minutes, textMeasurer))
     }
 
     Row(
@@ -47,27 +35,25 @@ fun CoordinateSystemParametersSection(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         OutlinedTextField(
-            value = maxX.toString(),
+            value = hours.toString(),
             onValueChange = { newValue ->
-                maxX = newValue.toIntOrNull() ?: 0
-                minX = -maxX
+                hours = newValue.toIntOrNull() ?: 0
             },
-            label = { Text("Max x") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.weight(1f),
-            singleLine = true
-        )
-        OutlinedTextField(
-            value = maxY.toString(),
-            onValueChange = { newValue ->
-                maxY = newValue.toIntOrNull() ?: 0
-                minY = -maxY
-            },
-            label = { Text("Max y") },
+            label = { Text("Godziny") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.weight(1f),
             singleLine = true
         )
 
+        OutlinedTextField(
+            value = minutes.toString(),
+            onValueChange = { newValue ->
+                minutes = newValue.toIntOrNull() ?: 0
+            },
+            label = { Text("Minuty") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            modifier = Modifier.weight(1f),
+            singleLine = true
+        )
     }
 }

@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.sp
+import pl.michal_cyran.math_tools.drawings.core.DefaultParameters
 import pl.michal_cyran.math_tools.theme.Colors
 
 fun drawCoordinatesSystemToBitmap(
@@ -21,8 +22,8 @@ fun drawCoordinatesSystemToBitmap(
     minY: Int = -10,
     maxY: Int = 10,
     includeGrid: Boolean = false,
-    width: Int = 1000,
-    height: Int = 1000,
+    width: Int = DefaultParameters.WIDTH,
+    height: Int = DefaultParameters.HEIGHT,
     textMeasurer: TextMeasurer,
 ): ImageBitmap {
     val drawScope = CanvasDrawScope()

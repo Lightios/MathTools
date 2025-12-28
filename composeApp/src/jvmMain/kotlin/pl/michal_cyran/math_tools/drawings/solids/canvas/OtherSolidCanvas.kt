@@ -1,4 +1,4 @@
-package pl.michal_cyran.math_tools.drawings.grid
+package pl.michal_cyran.math_tools.drawings.solids.canvas
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -9,10 +9,10 @@ import androidx.compose.ui.graphics.drawscope.CanvasDrawScope
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import pl.michal_cyran.math_tools.drawings.core.DefaultParameters
+import pl.michal_cyran.math_tools.drawings.solids.domain.OtherSolid
 
-fun drawGridToBitmap(
-    rows: Int,
-    columns: Int,
+fun drawOtherSolidToBitmap(
+    solid: OtherSolid,
     width: Int = DefaultParameters.WIDTH,
     height: Int = DefaultParameters.HEIGHT,
 ): ImageBitmap {
@@ -27,27 +27,24 @@ fun drawGridToBitmap(
         canvas = canvas,
         size = size,
     ) {
-        drawRect(color = Color.White.copy(alpha = 0.01f), topLeft = Offset.Zero, size = size)
-        val rowHeight = size.height / rows
-        val colWidth = size.width / columns
+        drawRect(color = Color.White.copy(alpha = 0f), topLeft = Offset.Zero, size = size)
 
-        for (i in 0..rows) {
-            val y = i * rowHeight
-            drawLine(
-                color = Color.Gray,
-                start = Offset(0f, y),
-                end = Offset(size.width, y),
-                strokeWidth = 5f
+        when (solid) {
+            OtherSolid.CUBE -> drawCube(
+                size = size,
+                drawScope = this,
             )
-        }
-
-        for (j in 0..columns) {
-            val x = j * colWidth
-            drawLine(
-                color = Color.Gray,
-                start = Offset(x, 0f),
-                end = Offset(x, size.height),
-                strokeWidth = 5f
+            OtherSolid.SPHERE -> drawContreSphere(
+                size = size,
+                drawScope = this,
+            )
+            OtherSolid.ROLLER -> drawRoller(
+                size = size,
+                drawScope = this,
+            )
+            OtherSolid.CONE -> drawCone(
+                size = size,
+                drawScope = this,
             )
         }
     }

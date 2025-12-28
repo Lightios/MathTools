@@ -2,6 +2,7 @@ package pl.michal_cyran.math_tools.drawings.core
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextMeasurer
+import pl.michal_cyran.math_tools.drawings.solids.domain.OtherSolid
 
 sealed class DrawingParameters {
     data class GridParameters(
@@ -22,6 +23,26 @@ sealed class DrawingParameters {
         val minY: Int,
         val maxY: Int,
         val includeGrid: Boolean = false,
+        val textMeasurer: TextMeasurer,
+    ) : DrawingParameters()
+
+    sealed class SolidParameters() : DrawingParameters() {
+        data class PrismParameters(
+            val baseSides: Int,
+        ) : SolidParameters()
+
+        data class PyramidParameters(
+            val baseSides: Int,
+        ) : SolidParameters()
+
+        data class OtherSolidParameters(
+            val solid: OtherSolid
+        ) : SolidParameters()
+    }
+
+    data class ClockParameters(
+        val hours: Int,
+        val minutes: Int,
         val textMeasurer: TextMeasurer,
     ) : DrawingParameters()
 }

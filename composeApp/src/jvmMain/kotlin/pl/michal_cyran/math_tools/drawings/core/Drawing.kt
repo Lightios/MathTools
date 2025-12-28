@@ -4,4 +4,6 @@ enum class Drawing {
     GRID,
     CHESSBOARD,
     COORDINATE_SYSTEM,
+    SOLID,
+    CLOCK,
 }
