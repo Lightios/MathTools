@@ -18,6 +18,7 @@ import pl.michal_cyran.math_tools.drawings.core.Drawing
 import pl.michal_cyran.math_tools.drawings.chessboard.ChessboardParametersSection
 import pl.michal_cyran.math_tools.drawings.clock.ClockParametersSection
 import pl.michal_cyran.math_tools.drawings.coordinate_system.CoordinateSystemParametersSection
+import pl.michal_cyran.math_tools.drawings.functions.FunctionParametersSection
 import pl.michal_cyran.math_tools.drawings.grid.GridParametersSection
 import pl.michal_cyran.math_tools.drawings.solids.ui.SolidsParametersSection
 
@@ -56,6 +57,9 @@ fun ParametersSection(
                     onParametersChange = onParametersChange
                 )
                 Drawing.CLOCK -> ClockParametersSection(
+                    onParametersChange = onParametersChange
+                )
+                Drawing.FUNCTION -> FunctionParametersSection(
                     onParametersChange = onParametersChange
                 )
             }

@@ -26,7 +26,7 @@ sealed class DrawingParameters {
         val textMeasurer: TextMeasurer,
     ) : DrawingParameters()
 
-    sealed class SolidParameters() : DrawingParameters() {
+    sealed class SolidParameters: DrawingParameters() {
         data class PrismParameters(
             val baseSides: Int,
         ) : SolidParameters()
@@ -45,4 +45,25 @@ sealed class DrawingParameters {
         val minutes: Int,
         val textMeasurer: TextMeasurer,
     ) : DrawingParameters()
+
+    sealed class FunctionParameters(
+        val csParameters: CoordinateSystemParameters,
+    ): DrawingParameters() {
+        class LinearFunctionParameters(
+            val a: Float,
+            val b: Float,
+            csParameters: CoordinateSystemParameters
+        ) : FunctionParameters(
+            csParameters = csParameters
+        )
+
+        class QuadraticFunctionParameters(
+            val a: Float,
+            val b: Float,
+            val c: Float,
+            csParameters: CoordinateSystemParameters
+        ) : FunctionParameters(
+            csParameters = csParameters
+        )
+    }
 }

@@ -17,6 +17,7 @@ data class TabData(
 
 val mainTabs = listOf(
     TabData("Układ współrzędnych", Drawing.COORDINATE_SYSTEM, Res.drawable.chart_data),
+    TabData("Funkcje", Drawing.FUNCTION, Res.drawable.chart_data),
     TabData("Bryły", Drawing.SOLID, Res.drawable.cube),
     TabData("Tabelka", Drawing.GRID, Res.drawable.table),
     TabData("Zegar", Drawing.CLOCK, Res.drawable.clock),

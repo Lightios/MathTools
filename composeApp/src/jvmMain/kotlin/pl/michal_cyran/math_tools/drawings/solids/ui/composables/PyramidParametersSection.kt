@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import pl.michal_cyran.math_tools.ui.NumericInput
 
 @Composable
 fun PyramidParametersSection(
@@ -30,19 +31,15 @@ fun PyramidParametersSection(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        OutlinedTextField(
-            value = baseSides.toString(),
-            onValueChange = { newValue ->
-                val intValue = newValue.toIntOrNull() ?: 0
-                if (intValue >= 3) {
-                    onParametersChange(intValue)
-                }
-                baseSides = intValue
+        NumericInput(
+            value = baseSides,
+            onValueChange = {
+                baseSides = it
             },
-            label = { Text("Liczba boków w podstawie (min 3)") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = "Liczba boków w podstawie",
+            minValue = 3,
+            maxValue = 6,
             modifier = Modifier.weight(1f),
-            singleLine = true
         )
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import pl.michal_cyran.math_tools.drawings.core.DrawingParameters
+import pl.michal_cyran.math_tools.ui.NumericInput
 
 @Composable
 fun GridParametersSection(
@@ -32,26 +33,26 @@ fun GridParametersSection(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        OutlinedTextField(
-            value = rows.toString(),
-            onValueChange = { newValue ->
-                rows = newValue.toIntOrNull() ?: 0
+        NumericInput(
+            value = rows,
+            onValueChange = {
+                rows = it
             },
-            label = { Text("Wiersze") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = "Wiersze",
+            minValue = 1,
+            maxValue = 10,
             modifier = Modifier.weight(1f),
-            singleLine = true
         )
 
-        OutlinedTextField(
-            value = columns.toString(),
-            onValueChange = { newValue ->
-                columns = newValue.toIntOrNull() ?: 0
+        NumericInput(
+            value = columns,
+            onValueChange = {
+                columns = it
             },
-            label = { Text("Kolumny") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = "Kolumny",
+            minValue = 1,
+            maxValue = 10,
             modifier = Modifier.weight(1f),
-            singleLine = true
         )
     }
 }

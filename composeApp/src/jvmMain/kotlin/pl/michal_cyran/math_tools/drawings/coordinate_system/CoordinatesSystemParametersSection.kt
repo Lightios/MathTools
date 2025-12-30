@@ -17,6 +17,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import pl.michal_cyran.math_tools.drawings.core.DrawingParameters
+import pl.michal_cyran.math_tools.ui.NumericInput
 
 @Composable
 fun CoordinateSystemParametersSection(
@@ -46,27 +47,28 @@ fun CoordinateSystemParametersSection(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        OutlinedTextField(
-            value = maxX.toString(),
-            onValueChange = { newValue ->
-                maxX = newValue.toIntOrNull() ?: 0
+        NumericInput(
+            value = maxX,
+            onValueChange = {
+                maxX = it
                 minX = -maxX
             },
-            label = { Text("Max x") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = "Maksymalny x",
+            minValue = 1,
+            maxValue = 15,
             modifier = Modifier.weight(1f),
-            singleLine = true
         )
-        OutlinedTextField(
-            value = maxY.toString(),
-            onValueChange = { newValue ->
-                maxY = newValue.toIntOrNull() ?: 0
+
+        NumericInput(
+            value = maxY,
+            onValueChange = {
+                maxY = it
                 minY = -maxY
             },
-            label = { Text("Max y") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = "Maksymalny Y",
+            minValue = 1,
+            maxValue = 15,
             modifier = Modifier.weight(1f),
-            singleLine = true
         )
 
     }

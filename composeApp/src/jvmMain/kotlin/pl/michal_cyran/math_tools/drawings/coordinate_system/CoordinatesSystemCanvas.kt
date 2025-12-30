@@ -21,7 +21,7 @@ fun drawCoordinatesSystemToBitmap(
     maxX: Int = 10,
     minY: Int = -10,
     maxY: Int = 10,
-    includeGrid: Boolean = false,
+    includeGrid: Boolean = true,
     width: Int = DefaultParameters.WIDTH,
     height: Int = DefaultParameters.HEIGHT,
     textMeasurer: TextMeasurer,

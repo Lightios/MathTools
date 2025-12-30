@@ -17,6 +17,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import pl.michal_cyran.math_tools.drawings.core.DrawingParameters
+import pl.michal_cyran.math_tools.ui.NumericInput
+import kotlin.math.min
 
 @Composable
 fun ClockParametersSection(
@@ -34,26 +36,26 @@ fun ClockParametersSection(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        OutlinedTextField(
-            value = hours.toString(),
-            onValueChange = { newValue ->
-                hours = newValue.toIntOrNull() ?: 0
+        NumericInput(
+            value = hours,
+            onValueChange = {
+                hours = it
             },
-            label = { Text("Godziny") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = "Godziny",
+            minValue = 0,
+            maxValue = 12,
             modifier = Modifier.weight(1f),
-            singleLine = true
         )
 
-        OutlinedTextField(
-            value = minutes.toString(),
-            onValueChange = { newValue ->
-                minutes = newValue.toIntOrNull() ?: 0
+        NumericInput(
+            value = minutes,
+            onValueChange = {
+                minutes = it
             },
-            label = { Text("Minuty") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = "Minuty",
+            minValue = 0,
+            maxValue = 60,
             modifier = Modifier.weight(1f),
-            singleLine = true
         )
     }
 }

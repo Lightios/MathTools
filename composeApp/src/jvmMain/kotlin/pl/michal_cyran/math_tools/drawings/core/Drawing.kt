@@ -6,4 +6,5 @@ enum class Drawing {
     COORDINATE_SYSTEM,
     SOLID,
     CLOCK,
+    FUNCTION,
 }

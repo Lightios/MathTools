@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import pl.michal_cyran.math_tools.drawings.chessboard.drawChessboardToBitmap
 import pl.michal_cyran.math_tools.drawings.clock.drawClockToBitmap
 import pl.michal_cyran.math_tools.drawings.coordinate_system.drawCoordinatesSystemToBitmap
+import pl.michal_cyran.math_tools.drawings.functions.drawFunctionToBitmap
 import pl.michal_cyran.math_tools.drawings.grid.drawGridToBitmap
 import pl.michal_cyran.math_tools.drawings.solids.canvas.drawOtherSolidToBitmap
 import pl.michal_cyran.math_tools.drawings.solids.canvas.drawPrismToBitmap
@@ -59,6 +60,29 @@ class DrawingFactoryImpl : DrawingFactory {
                     minute = parameters.minutes,
                     textMeasurer = parameters.textMeasurer,
                 )
+            }
+
+            is DrawingParameters.FunctionParameters -> {
+                return when (parameters) {
+                    is DrawingParameters.FunctionParameters.LinearFunctionParameters -> {
+                        drawFunctionToBitmap(
+                            parameters = parameters,
+                        )
+                    }
+                    is DrawingParameters.FunctionParameters.QuadraticFunctionParameters -> {
+                        drawFunctionToBitmap(
+                            parameters,
+                        )
+                    }
+                }
+//                return drawFunctionToBitmap(
+//                    minX = parameters.minX,
+//                    maxX = parameters.maxX,
+//                    minY = parameters.minY,
+//                    maxY = parameters.maxY,
+//                    includeGrid = parameters.includeGrid,
+//                    functionParameters = parameters,
+//                )
             }
         }
     }
