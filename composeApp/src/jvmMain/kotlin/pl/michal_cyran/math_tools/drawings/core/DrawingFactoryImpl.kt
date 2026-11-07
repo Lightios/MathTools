@@ -29,10 +29,7 @@ class DrawingFactoryImpl : DrawingFactory {
             }
             is DrawingParameters.CoordinateSystemParameters -> {
                 return drawCoordinatesSystemToBitmap(
-                    minX = parameters.minX,
-                    maxX = parameters.maxX,
-                    minY = parameters.minY,
-                    maxY = parameters.maxY,
+                    size = parameters.size,
                     includeGrid = parameters.includeGrid,
                     textMeasurer = parameters.textMeasurer,
                 )
@@ -41,11 +38,11 @@ class DrawingFactoryImpl : DrawingFactory {
             is DrawingParameters.SolidParameters -> {
                 return when (parameters) {
                     is DrawingParameters.SolidParameters.PrismParameters -> {
-                        drawPrismToBitmap(parameters.baseSides)
+                        drawPrismToBitmap(parameters.baseSides, parameters.height)
                     }
 
                     is DrawingParameters.SolidParameters.PyramidParameters -> {
-                        drawPyramidToBitmap(parameters.baseSides)
+                        drawPyramidToBitmap(parameters.baseSides, parameters.height)
                     }
 
                     is DrawingParameters.SolidParameters.OtherSolidParameters -> {

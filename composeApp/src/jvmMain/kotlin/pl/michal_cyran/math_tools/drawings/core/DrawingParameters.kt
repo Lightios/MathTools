@@ -18,10 +18,7 @@ sealed class DrawingParameters {
     ) : DrawingParameters()
 
     data class CoordinateSystemParameters(
-        val minX: Int,
-        val maxX: Int,
-        val minY: Int,
-        val maxY: Int,
+        val size: Int,
         val includeGrid: Boolean = false,
         val textMeasurer: TextMeasurer,
     ) : DrawingParameters()
@@ -29,10 +26,12 @@ sealed class DrawingParameters {
     sealed class SolidParameters: DrawingParameters() {
         data class PrismParameters(
             val baseSides: Int,
+            val height: Int,
         ) : SolidParameters()
 
         data class PyramidParameters(
             val baseSides: Int,
+            val height: Int,
         ) : SolidParameters()
 
         data class OtherSolidParameters(

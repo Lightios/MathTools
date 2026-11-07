@@ -17,15 +17,17 @@ import pl.michal_cyran.math_tools.drawings.core.DefaultParameters
 import pl.michal_cyran.math_tools.theme.Colors
 
 fun drawCoordinatesSystemToBitmap(
-    minX: Int = -10,
-    maxX: Int = 10,
-    minY: Int = -10,
-    maxY: Int = 10,
+    size: Int,
     includeGrid: Boolean = true,
     width: Int = DefaultParameters.WIDTH,
     height: Int = DefaultParameters.HEIGHT,
     textMeasurer: TextMeasurer,
 ): ImageBitmap {
+    val minX: Int = -size
+    val maxX: Int = size
+    val minY: Int = -size
+    val maxY: Int = size
+
     val drawScope = CanvasDrawScope()
     val size = Size(width.toFloat(), height.toFloat())
     val bitmap = ImageBitmap(width, height)

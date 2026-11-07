@@ -18,13 +18,15 @@ fun SolidsParametersSubsection(
 
     when (solid) {
         MainSolid.PRISM -> PrismParametersSection(
-            onParametersChange = { newBaseSides ->
-                onParametersChange(DrawingParameters.SolidParameters.PrismParameters(newBaseSides))
+            onParametersChange = { newBaseSides, newHeight ->
+                onParametersChange(
+                    DrawingParameters.SolidParameters.PrismParameters(newBaseSides, newHeight)
+                )
             }
         )
         MainSolid.PYRAMID -> PyramidParametersSection(
-            onParametersChange = { newBaseSides ->
-                onParametersChange(DrawingParameters.SolidParameters.PyramidParameters(newBaseSides))
+            onParametersChange = { newBaseSides, newHeight ->
+                onParametersChange(DrawingParameters.SolidParameters.PyramidParameters(newBaseSides, newHeight))
             }
         )
         MainSolid.OTHER -> OtherSolidParameters(

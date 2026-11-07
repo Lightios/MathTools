@@ -31,10 +31,7 @@ fun LinearFunctionParametersSection(
     val coordinateSystemParameters by remember {
         mutableStateOf(
             DrawingParameters.CoordinateSystemParameters(
-                minX = -10,
-                maxX = 10,
-                minY = -10,
-                maxY = 10,
+                size = 5,
                 includeGrid = true,
                 textMeasurer = textMeasurer
             )

@@ -20,20 +20,13 @@ import pl.michal_cyran.math_tools.drawings.core.DrawingParameters
 fun drawFunctionToBitmap(
     parameters: DrawingParameters.FunctionParameters,
 ): ImageBitmap {
-    val minX = parameters.csParameters.minX
-    val maxX = parameters.csParameters.maxX
-    val minY = parameters.csParameters.minY
-    val maxY = parameters.csParameters.maxY
     val width = DefaultParameters.WIDTH
     val height = DefaultParameters.HEIGHT
     val includeGrid = parameters.csParameters.includeGrid
     val textMeasurer = parameters.csParameters.textMeasurer
 
     val bitmap = drawCoordinatesSystemToBitmap(
-        minX = minX,
-        maxX = maxX,
-        minY = minY,
-        maxY = maxY,
+        size = parameters.csParameters.size,
         includeGrid = includeGrid,
         textMeasurer = textMeasurer,
     )
@@ -51,18 +44,15 @@ fun drawFunctionToBitmap(
     ) {
         val points = mutableListOf<Offset>()
 
-        var x = minX.toFloat()
-        while (x < maxX - 0.1f) {
+        var x = -parameters.csParameters.size.toFloat()
+        while (x < parameters.csParameters.size - 0.1f) {
             val y = findY(parameters, x)
 
             val offset = coordinatesToOffset(
                 x = x,
                 y = y,
                 size = size,
-                minX = minX,
-                maxX = maxX,
-                minY = minY,
-                maxY = maxY,
+                range = parameters.csParameters.size,
             )
 
             points.add(offset)
@@ -103,16 +93,10 @@ fun coordinatesToOffset(
     x: Float,
     y: Float,
     size: Size,
-    minX: Int,
-    maxX: Int,
-    minY: Int,
-    maxY: Int,
+    range: Int,
 ): Offset {
-    val rangeX = maxX - minX
-    val rangeY = maxY - minY
-
-    val percentX = (x - minX) * 1f / rangeX
-    val percentY = (y - minY) * 1f / rangeY
+    val percentX = (x + range) * 1f / range
+    val percentY = (y + range) * 1f / range
 
     return Offset(
         x = percentX * size.width,
@@ -131,10 +115,7 @@ fun FunctionPreview() {
             b = 3f,
             c = 2f,
             csParameters = DrawingParameters.CoordinateSystemParameters(
-                minX = -5,
-                maxX = 5,
-                minY = -5,
-                maxY = 5,
+                size = 5,
                 includeGrid = true,
                 textMeasurer = textMeasurer
             )

@@ -23,20 +23,14 @@ import pl.michal_cyran.math_tools.ui.NumericInput
 fun CoordinateSystemParametersSection(
     onParametersChange: (DrawingParameters.CoordinateSystemParameters) -> Unit = {}
 ) {
-    var minX by remember { mutableStateOf(-5) }
-    var maxX by remember { mutableStateOf(5) }
-    var minY by remember { mutableStateOf(-5) }
-    var maxY by remember { mutableStateOf(5) }
+    var size by remember { mutableStateOf(5) }
 
     val textMeasurer = rememberTextMeasurer()
 
-    LaunchedEffect(minX, maxY, minY, maxY) {
+    LaunchedEffect(size) {
         onParametersChange(
             DrawingParameters.CoordinateSystemParameters(
-                minX = minX,
-                maxX = maxX,
-                minY = minY,
-                maxY = maxY,
+                size = size,
                 includeGrid = false,
                 textMeasurer = textMeasurer
             )
@@ -48,28 +42,14 @@ fun CoordinateSystemParametersSection(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         NumericInput(
-            value = maxX,
+            value = size,
             onValueChange = {
-                maxX = it
-                minX = -maxX
+                size = it
             },
-            label = "Maksymalny x",
-            minValue = 1,
-            maxValue = 15,
+            label = "Przedział osi",
+            minValue = 5,
+            maxValue = 20,
             modifier = Modifier.weight(1f),
         )
-
-        NumericInput(
-            value = maxY,
-            onValueChange = {
-                maxY = it
-                minY = -maxY
-            },
-            label = "Maksymalny Y",
-            minValue = 1,
-            maxValue = 15,
-            modifier = Modifier.weight(1f),
-        )
-
     }
 }
