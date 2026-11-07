@@ -13,6 +13,7 @@ import pl.michal_cyran.math_tools.drawings.core.DefaultParameters
 
 fun drawPrismToBitmap(
     baseSides: Int,
+    prismHeight: Int,
     width: Int = DefaultParameters.WIDTH,
     height: Int = DefaultParameters.HEIGHT,
 ): ImageBitmap {
@@ -30,29 +31,19 @@ fun drawPrismToBitmap(
         val color = Color.Cyan
         drawRect(color = Color.White.copy(alpha = 0f), topLeft = Offset.Zero, size = size)
 
-        val sides = getSidesOfPrism(baseSides)
+        val dashEffect = PathEffect.dashPathEffect(floatArrayOf(20f, 20f), 0f)
 
-        for (i in 0..sides.lastIndex step 3) {
-            val p1 = sides[i] as Pair<Float, Float>
-            val p2 = sides[i + 1] as Pair<Float, Float>
-            val isDashed = sides[i + 2] as Boolean
+        for (edge in getSidesOfPrism(baseSides, prismHeight)) {
+            val o1 = Offset(edge.p1.first * size.width, edge.p1.second * size.height)
+            val o2 = Offset(edge.p2.first * size.width, edge.p2.second * size.height)
 
-            val x1 = p1.first * size.width
-            val y1 = p1.second * size.height
-
-            val x2 = p2.first * size.width
-            val y2 = p2.second * size.height
-
-            val o1 = Offset(x1, y1)
-            val o2 = Offset(x2, y2)
-
-            val effect = if (isDashed) {
-                PathEffect.dashPathEffect(floatArrayOf(20f, 20f), 0f)
-            } else {
-                null
-            }
-
-            drawLine(color, o1, o2, strokeWidth = 5f, pathEffect = effect)
+            drawLine(
+                color = color,
+                start = o1,
+                end = o2,
+                strokeWidth = 5f,
+                pathEffect = if (edge.dashed) dashEffect else null,
+            )
         }
     }
     return bitmap

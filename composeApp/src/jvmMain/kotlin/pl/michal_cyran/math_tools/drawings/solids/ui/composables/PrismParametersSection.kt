@@ -19,12 +19,13 @@ import pl.michal_cyran.math_tools.ui.NumericInput
 
 @Composable
 fun PrismParametersSection(
-    onParametersChange: (Int) -> Unit = {},
+    onParametersChange: (Int, Int) -> Unit = { _, _ -> },
 ) {
     var baseSides by remember { mutableStateOf(3) }
+    var prismHeight by remember { mutableStateOf(5) }
 
-    LaunchedEffect(baseSides) {
-        onParametersChange(baseSides)
+    LaunchedEffect(baseSides, prismHeight) {
+        onParametersChange(baseSides, prismHeight)
     }
 
     Row(
@@ -40,6 +41,17 @@ fun PrismParametersSection(
             label = "Liczba boków w podstawie",
             minValue = 3,
             maxValue = 6,
+            modifier = Modifier.weight(1f),
+        )
+
+        NumericInput(
+            value = prismHeight,
+            onValueChange = {
+                prismHeight = it
+            },
+            label = "Wysokość graniastosłupa",
+            minValue = 1,
+            maxValue = 10,
             modifier = Modifier.weight(1f),
         )
     }
